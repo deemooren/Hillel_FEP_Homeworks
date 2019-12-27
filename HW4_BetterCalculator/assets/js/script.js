@@ -1,25 +1,25 @@
 "use strict";
 
 const operation = askOperation();
-const a = askOperand("first");
-const b = askOperand("second");
+const firstOperand = askOperand("first");
+const secondOperand = askOperand("second");
 let result = null;
 
 switch(operation) {
     case "+":
-        result = a + b;
+        result = firstOperand + secondOperand;
         break;
     case "-":
-        result = a - b;
+        result = firstOperand - secondOperand;
         break;
     case "*":
-        result = a * b;
+        result = firstOperand * secondOperand;
         break;
     case "/":
-        result = a / b;
+        result = firstOperand / secondOperand;
         break;
 }
-alert(`Result: ${a} ${operation} ${b} = ${result}`);
+alert(`Result: ${firstOperand} ${operation} ${secondOperand} = ${result}`);
 
 
 function askOperation(){
