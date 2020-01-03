@@ -5,7 +5,7 @@ const quantityOfOperands = askQuantityOfOperands();
 let result = null;
 
 for(let i = 1; i <= quantityOfOperands; i++) {
-    const operand = Number(askOperand());
+    const operand = askOperand();
 
     if(result == null) {
         result = operand;
@@ -58,5 +58,5 @@ function askOperand() {
         i++;
     } while(isNaN(operand));
 
-    return operand;
+    return Number(operand);
 }
