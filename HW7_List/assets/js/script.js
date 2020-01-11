@@ -5,9 +5,10 @@ const ulistElement = document.querySelector("#list");
 const errorMessageElement = document.querySelector("#errorMessage");
 
 document.querySelector("#generateBtn").addEventListener("click", generateListBtnClick);
-document.querySelector("#listGenerator").onsubmit = function() { return false; };
 
-function generateListBtnClick() {
+function generateListBtnClick(e) {
+    e.preventDefault();
+
     clearErrorMesage();
     clearList();
     generateList();
@@ -17,18 +18,18 @@ function generateListBtnClick() {
 function generateList() {
     const quantity = itemsQuantityElement.value;
 
-    if(quantity === "") {
-        return;
-    }
-    else if(isNaN(quantity) || quantity <= 0 || quantity > 100) {
-        showErrorMessage("Entered value has to be a number, greater than 0 and less than 100!");
-    }
-    else {
+    if(validateInput(quantity)) {
         addListItems(quantity);
     }
+    else {
+        showErrorMessage();
+    }
 }
-function showErrorMessage(message) {
-    errorMessageElement.textContent = message;
+function validateInput(quantity) {
+    return (!isNaN(quantity)) && (quantity !== "") && (quantity > 0) && (quantity < 100);
+}
+function showErrorMessage() {
+    errorMessageElement.textContent = "Entered value has to be a number, greater than 0 and less than 100!";
 }
 function addListItems(quantity) {
     for(let i = 1; i <= quantity; i++) {
