@@ -4,24 +4,54 @@ const addContactForm = document.querySelector('#addContactForm');
 const contactBook = document.querySelector('#contactBook');
 const tableRowTemplate = document.querySelector('#tableRowTemplate').innerHTML;
 const lastNode = document.querySelector('#lastNode');
+const inputElements = document.querySelectorAll('#name, #surname, #phone');
 
 addContactForm.addEventListener('submit', addContactFormSubmit);
 contactBook.addEventListener('click', onTabelRowClick);
 
+for (let i = 0; i < inputElements.length; i++) {
+    inputElements[i].addEventListener("blur", inputFieldOnBlur, true);
+    inputElements[i].addEventListener("focus", inputFieldOnFocus, true);
+}
+
 function addContactFormSubmit(e) {
     e.preventDefault();
     submitForm();
-    clearForm();
 }
 function onTabelRowClick(e) {
     if(e.target.classList.contains('delete-btn')) {
         e.target.closest('#contact').remove();
     }
 }
+function inputFieldOnBlur() {
+    if(this.value.trim() === '') {
+        this.classList.add('invalid');
+    }
+}
+function inputFieldOnFocus() {
+    if(this.classList.contains('invalid')) {
+        this.classList.remove('invalid');
+    }
+}
 function submitForm() {
-    const contact = getInputValues();
-
-    addContact(contact);
+    if(isAllFormInputsAreValid()) {
+        const contact = getInputValues();
+        addContact(contact);
+        clearForm();
+    }
+}
+function isAllFormInputsAreValid() {
+    let isValid = true;
+    for (let i = 0; i < inputElements.length; i++) {
+        if(inputElements[i].classList.contains('invalid') || isEmpty(inputElements[i].value)) {
+            isValid = false;
+            inputElements[i].classList.add('invalid');
+        }
+    }
+    return isValid;
+}
+function isEmpty(value) {
+    return value.trim() === '';
 }
 function getInputValues() {
     const formFields = addContactForm.elements;
