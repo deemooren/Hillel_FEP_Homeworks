@@ -10,34 +10,36 @@
     <script src="assets/js/script.js" defer></script>
 </head>
 <body>
-    <table id="contactBook"  class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Surname</th>
-                <th scope="col">Phone</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr id="lastNode">
-                <form id="addContactForm">
-                    <th><input type="text" class="form-control" name="name" id="name" placeholder="Name"></th>
-                    <td><input type="text" class="form-control" name="surname" id="surname" placeholder="Surname"></td>
-                    <td><input type="tel" class="form-control" name="phone" id="phone" placeholder="+38093XXXXXXX" pattern="\+380[0-9]{9}"></td>
-                    <td><button class="btn btn-outline-dark">Add</button></td>
-                </form>
-              </tr>
-        </tbody>
-    </table>
+    <form id="addContactForm">
+        <table id="contactBook"  class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="lastNode">
+                        <th><input type="text" class="form-control" name="name" id="name" placeholder="Name"></th>
+                        <td><input type="text" class="form-control" name="surname" id="surname" placeholder="Surname"></td>
+                        <td><input type="tel" class="form-control" name="phone" id="phone" placeholder="+38093XXXXXXX" pattern="\+380[0-9]{9}"></td>
+                        <td><button class="btn btn-outline-dark">Add</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
 
-    <template type="text/template" id="tableRowTemplate">
+
+
+    <script type="text/template" id="tableRowTemplate">
         <tr id="contact">
             <td>{{name}}</td>
             <td>{{surname}}</td>
             <td>{{phone}}</td>
             <td><button class="btn btn-outline-dark delete-btn">Delete</button></td>
         </tr>
-    </template>
+    </script>
 </body>
 </html>

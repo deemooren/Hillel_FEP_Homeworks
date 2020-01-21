@@ -29,9 +29,7 @@ function inputFieldOnBlur() {
     }
 }
 function inputFieldOnFocus() {
-    if(this.classList.contains('invalid')) {
-        this.classList.remove('invalid');
-    }
+    this.classList.remove('invalid');
 }
 function submitForm() {
     if(isAllFormInputsAreValid()) {
