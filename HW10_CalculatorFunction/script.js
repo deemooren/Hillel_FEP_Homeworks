@@ -1,6 +1,4 @@
-function createCalculator(value) {
-    let firstOperand = value;
-
+function createCalculator(firstOperand) {
     return {
         add: (secondOperand) => firstOperand + secondOperand,
         sub: (secondOperand) => firstOperand - secondOperand,
