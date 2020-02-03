@@ -4,10 +4,8 @@ const ulistElement = document.querySelector("#toDoList");
 const liTemplate = document.querySelector("#liTemplate").innerHTML;
 
 fetch('https://jsonplaceholder.typicode.com/todos')
-    .then(response => {
-        response.json()
-        .then(renderTodos);
-    });
+    .then(response => response.json())
+    .then(renderTodos);
 
 document.querySelector("#toDoList").addEventListener("click", markListItem);
 
