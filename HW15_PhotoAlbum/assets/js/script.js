@@ -118,10 +118,10 @@ function removeElement(div) {
     div.remove();
 }
 function bindEventListener() {
-    document.addEventListener('keyup', onKeypress); 
+    document.addEventListener('keydown', onKeypress); 
 }
 function removeEventListener() {
-    document.removeEventListener('keyup', onKeypress); 
+    document.removeEventListener('keydown', onKeypress); 
 }
 function onKeypress(e) {
     if(e.keyCode === ESCAPE_BTN) {
