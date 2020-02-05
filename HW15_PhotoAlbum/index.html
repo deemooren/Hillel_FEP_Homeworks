@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Photo Album</title>
 
-
     <link href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="assets/css/style.css">
 
     <script src="assets/js/script.js" defer></script>
@@ -19,7 +17,7 @@
 
         </div>
         <div class="photos">
-            <div  id="photos" class="actual-photos">
+            <div  id="actual-photos" class="actual-photos">
             </div>
             <div id="loader" class="loader hidden">
                 <div class="lds-default"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
@@ -31,8 +29,16 @@
     <script type="text/template" id="albumItemTemplate">
         <div class="album-title" data-id="{{albumId}}">{{album}}</div>
     </script>
+
     <script type="text/template" id="photoItemTemplate">
-        <div class="photo"><img class="image" src="{{tinyImgUrl}}" alt="{{altText}}"></div>
+        <div class="photo"><img class="image" src="{{tinyImgUrl}}" alt="{{altText}}" data-full-img-url="{{fullImgUrl}}"></div>
+    </script>
+
+    <script type="text/template" id="fullScreenPhoto">
+        <div id="full-screen-image" class="full-screen-image">
+            <img src="{{url}}">
+            <span class="close">&times;</span>
+        </div>
     </script>
 </body>
 </html>
