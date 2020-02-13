@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+}
+.main-container {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    background: #4B79A1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #283E51, #4B79A1);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #283E51, #4B79A1); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    min-height: 100vh;
+}
+.default-width {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 20px;
+}
+.main-container .panel {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: auto;
+    text-align: right;
+    padding: 20px 0;
+}
+.main-container .panel .add-btn {
+    height: 45px;
+    width: 45px;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 22px;
+    border: none;
+    color: #fff;
+    margin-right: 30px;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.main-container .panel .add-btn:hover {
+    cursor: pointer;
+}
+.main-container .panel .add-btn:focus {
+    outline: none;
+}
+.main-container .content {
+    height: auto;
+}
+.main-container .content .stickers-container {
+    padding: 20px 0;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 20px;
+    justify-items: center;
+}
+.main-container .content .sticker {
+    background-color: #fff;
+    position: relative;
+    width: 250px;
+    height: 250px;
+    padding: 40px 20px 20px;
+    border-radius: 10px;
+}
+.main-container .content .sticker .delete-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 15px;
+    color: #ac9393;
+    font-size: 30px;
+    font-weight: bold;
+}
+.main-container .content .sticker .sticker-text {
+    resize: none;
+    width: 100%;
+    min-height: 180px;
+    border: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 15px;
+}
+.main-container .content .sticker .sticker-text:focus {
+    outline: none;
+}
+
+@media (max-width: 1240px) {
+    .main-container .content .stickers-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (max-width: 828px) {
+    .main-container .content .stickers-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media (max-width: 568px) {
+    .main-container .content .stickers-container {
+        grid-template-columns: 1fr;
+    }
+}
