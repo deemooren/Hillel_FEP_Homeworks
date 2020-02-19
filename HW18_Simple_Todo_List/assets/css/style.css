@@ -1,0 +1,102 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #005AA7;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FFFDE4, #005AA7);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FFFDE4, #005AA7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: Arial, Helvetica, sans-serif;
+}
+* {
+    box-sizing: border-box;
+}
+.container {
+    width: 50%;
+    margin:  50px auto;
+    background-color: rgba(255, 255, 255, 0.4);
+}
+.header {
+    padding: 10px;
+}
+.header .title {
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 1px;
+    font-size: 28px;
+}
+.todo-list {
+    list-style: none;
+    padding: 0;
+    background-color: #fff;
+    margin: 0;
+}
+.todo-item:nth-of-type(even) {
+    background-color: #e7e8f9;
+}
+.todo-item {
+    height: 50px;
+    line-height: 50px;
+    position: relative;
+    padding: 0 10px;
+}
+.todo-item .delete-btn {
+    height: 50px;
+    color: #ac9393;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+}
+.todo-item .delete-btn:hover {
+    cursor: pointer;
+}
+.todo-item.done {
+    text-decoration: line-through;
+    color: gray;
+}
+.form-container {
+    padding-top: 1px;
+}
+.addTodoForm {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+.addTodoForm .todo-input {
+    width: 85%;
+    height: 50px;
+    border: none;
+    padding: 15px;
+    font-size: 16px;
+}
+.addTodoForm .add-btn {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff;
+    font-size: 18px;
+    background-color: #73a5cc;
+    border: none;    
+    width: 15%;
+    height: 50px;
+}
+.addTodoForm .add-btn:hover {
+    cursor: pointer;
+}
+
+@media (max-width: 900px) {
+    .container {
+        width: 70%;
+    }
+}
+@media (max-width: 700px) {
+    .container {
+        width: 85%;
+    }
+}
+@media (max-width: 480px) {
+    .container {
+        width: 95%;
+    }
+}
