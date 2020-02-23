@@ -24,12 +24,13 @@ init();
 $panel.on('click', '#addStickerBtn', openDialogWindow);
 $panel.on('click', '#resetPositionsBtn', onResetBtnClick);
 $stickersContainer.on('click', '.delete-btn', onDeleteBtnClick);
+$stickersContainer.on('focus', '.sticker', onStickerFocus);
 $stickersContainer.on('blur', '.sticker', onStickerBlur);
 
 function init() {
     getStickers();
 }
-function openDialogWindow(e) {
+function openDialogWindow() {
     dialog.dialog( 'open');
 }
 function closeDialogWindow() {
@@ -54,9 +55,14 @@ function onStickerBlur(e) {
     const id = $(e.target).closest('.' + STICKER_CLASS).data('id');
     editStickerText(id, value);
 }
-function onResetBtnClick(e) {
+function onStickerFocus(e) {
+    refreshZIndex($(e.target).parent());
+}
+function onResetBtnClick() {
+    let topPosition = 0;
     stickers.map(sticker => {
-        sticker.positionLeft = sticker.positionTop = 0;
+        sticker.positionLeft = 0;
+        sticker.positionTop = (topPosition += 60);
     });
 
     saveStickersInStorage(stickers);
@@ -91,7 +97,7 @@ function renderSticker(item) {
 
     $newElem.draggable({
         containment: "parent",
-        start: refreshZIndex,
+        start: (e) => refreshZIndex($(e.target)),
         stop: saveStickerPosition
     });
 }
@@ -126,8 +132,8 @@ function saveStickersInStorage(stickers) {
 function getDOMElemByDataId(id) {
     return $('.sticker[data-id="' + id + '"]');
 }
-function refreshZIndex() {
-    $(this).css('z-index', ++currentZIndex);
+function refreshZIndex($currElem) {
+    $currElem.css('z-index', ++currentZIndex);
 }
 function saveStickerPosition() {
     const $currElement = $(this);

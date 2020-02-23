@@ -61,10 +61,11 @@ body {
     column-gap: 20px;
     row-gap: 20px;
     justify-items: center;
+    position: relative;
 }
 .main-container .content .sticker {
+    position: absolute;
     background-color: #fff;
-    position: relative;
     width: 250px;
     height: 250px;
     padding: 40px 20px 20px;
