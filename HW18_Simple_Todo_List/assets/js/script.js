@@ -1,13 +1,14 @@
 const TODOS_KEY = 'todos';
 
-const $todoListElement = $('.todo-list');
+const $todoListElement = $('#todoList');
 const $addTodoForm = $('#addTodoForm');
 let todos = [];
 
 init();
 
 $addTodoForm.submit(onSubmitForm);
-$todoListElement.click('.todo-item', onTodoItemClick);
+$todoListElement.on('click', '.todo-item', onTodoItemClick);
+$todoListElement.on('click', '.delete-btn', onDeleteBtnClick);
 
 function init() {
     getTodos();
@@ -19,12 +20,13 @@ function onSubmitForm(e) {
 }
 function onTodoItemClick(e) {
     const $target = $(e.target);
+    editTodoItem($target.data('id'));
+}
+function onDeleteBtnClick(e) {
+    e.stopPropagation();
 
-    if($target.hasClass('delete-btn')) {
-        deleteDotoItem($target.parent().data('id'));
-    } else {
-        editTodoItem($target.data('id'));
-    }
+    const $target = $(e.target);
+    deleteDotoItem($target.parent().data('id'));
 }
 function addTodo() {
     const text = $('#todoInput').val().trim();
@@ -33,9 +35,7 @@ function addTodo() {
         const newTodo = createNewTodo(text);
         todos.push(newTodo);
         saveChanchingInLocalStorage(todos);
-
-        const pushedTodo = getElementFormArrayById(newTodo.id);
-        renderTodoItem(pushedTodo);
+        renderTodoItem(newTodo);
     }
 }
 function getTodos() {
@@ -54,8 +54,8 @@ function renderTodos(data) {
     });
 }
 function renderTodoItem(todo) {
-    const $listTemplate = $('#liElementTemplate').html();
-    const $todo = $($listTemplate.replace('{{to-do}}', todo.title)
+    const listTemplate = $('#liElementTemplate').html();
+    const $todo = $(listTemplate.replace('{{to-do}}', todo.title)
                                  .replace('{{id}}', todo.id));
     if(todo.isDone) {
         $todo.addClass('done');
@@ -81,7 +81,7 @@ function editTodoItem(id) {
     const $currElement = getDOMElementByDataId(id);
     $currElement.toggleClass('done');
 
-    const currItem = getElementFormArrayById(id);
+    const currItem = todos.find(item => item.id === id);
     const currStatus = currItem.isDone;
     currItem.isDone = currStatus ? false : true;
     saveChanchingInLocalStorage(todos);
@@ -90,11 +90,8 @@ function saveChanchingInLocalStorage(todos) {
     localStorage.setItem(TODOS_KEY, JSON.stringify(todos));
 }
 function resetForm() {
-    $addTodoForm.trigger("reset");
+    $addTodoForm.trigger('reset');
 }
 function getDOMElementByDataId(id) {
     return $(`.todo-item[data-id='${id}']`);
-}
-function getElementFormArrayById(id) {
-    return todos.find(item => item.id === id);
 }
