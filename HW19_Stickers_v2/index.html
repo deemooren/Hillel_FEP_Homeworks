@@ -16,7 +16,7 @@
 <body>
     <div id="dialogForm" class="dialog-form" title="Add new sticker">
         <form id="addStickerForm" class="add-sticker-form">
-            <div class="error-message hidden">You can`t create empty sticker!</div>
+            <div id="errorMessage" class="error-message hidden">You can`t create empty sticker!</div>
             <textarea name="text" id="text" placeholder="Enter your text..." cols="36" rows="10"></textarea>
         </form>
     </div>
@@ -24,7 +24,8 @@
     <div class="main-container">
         <div id="panel" class="panel">
             <div class="default-width">
-                <button id="addStickerBtn" class="add-btn" title="Add new sticker">+</button>
+                <button id="addStickerBtn" class="btn">Add sticker</button>
+                <button id="resetPositionsBtn" class="btn">Reset positions</button>
             </div>
         </div>
         <div class="content">
@@ -35,7 +36,7 @@
         </div>
     </div>
 
-    
+
     <script type="text/template" id="stickerTemplate">
         <div class="sticker" data-id="{{id}}">
             <textarea class="sticker-text" name="sticker-text" id="stickerText" maxlength="180">{{text}}</textarea>

@@ -3,7 +3,11 @@ const HIDDEN_CLASS = 'hidden';
 const KEY_STICKERS = 'stickers';
 
 const $stickersContainer = $('#stickersContainer');
-const $errorMessage = $('.error-message');
+const $errorMessage = $('#errorMessage');
+const $panel = $('#panel');
+let currentZIndex = 1;
+let stickers = [];
+
 const dialog = $('#dialogForm').dialog({
     autoOpen: false,
     height: 340,
@@ -14,18 +18,18 @@ const dialog = $('#dialogForm').dialog({
         CANCEL: closeDialogWindow
     }
 });
-let stickers = [];
 
 init();
 
-$('#panel').on('click', '#addStickerBtn', openDialogWindow);
+$panel.on('click', '#addStickerBtn', openDialogWindow);
+$panel.on('click', '#resetPositionsBtn', onResetBtnClick);
 $stickersContainer.on('click', '.delete-btn', onDeleteBtnClick);
 $stickersContainer.on('blur', '.sticker', onStickerBlur);
 
 function init() {
     getStickers();
 }
-function openDialogWindow() {
+function openDialogWindow(e) {
     dialog.dialog( 'open');
 }
 function closeDialogWindow() {
@@ -48,10 +52,18 @@ function onDeleteBtnClick(e) {
 function onStickerBlur(e) {
     const value = $(e.target).val().trim();
     const id = $(e.target).closest('.' + STICKER_CLASS).data('id');
-    
     editStickerText(id, value);
 }
+function onResetBtnClick(e) {
+    stickers.map(sticker => {
+        sticker.positionLeft = sticker.positionTop = 0;
+    });
 
+    saveStickersInStorage(stickers);
+
+    $stickersContainer.html('');
+    renderStickers(stickers);
+}
 function getStickers() {
     let data = localStorage.getItem(KEY_STICKERS);
     data = data ? JSON.parse(data) : [];
@@ -68,15 +80,27 @@ function renderStickers(data) {
     });
 }
 function renderSticker(item) {
-    const newSticker = $('#stickerTemplate').html().replace('{{id}}', item.id)
+    const newStickerHtml = $('#stickerTemplate').html().replace('{{id}}', item.id)
                                        .replace('{{text}}', item.text);
     
-    $stickersContainer.append(newSticker);
+    $stickersContainer.append(newStickerHtml);
+    const $newElem = $(getDOMElemByDataId(item.id));
+
+    $newElem.css('left', item.positionLeft);
+    $newElem.css('top', item.positionTop);
+
+    $newElem.draggable({
+        containment: "parent",
+        start: refreshZIndex,
+        stop: saveStickerPosition
+    });
 }
 function createNewSticker(text) {
     const sticker = {
         id: Date.now(),
-        text: text
+        text: text,
+        positionLeft: '',
+        positionTop: ''
     };
     stickers.push(sticker);
     saveStickersInStorage(stickers);
@@ -101,4 +125,16 @@ function saveStickersInStorage(stickers) {
 }
 function getDOMElemByDataId(id) {
     return $('.sticker[data-id="' + id + '"]');
+}
+function refreshZIndex() {
+    $(this).css('z-index', ++currentZIndex);
+}
+function saveStickerPosition() {
+    const $currElement = $(this);
+    
+    const currSticker = stickers.find(sticker => sticker.id === Number($currElement.data('id')));
+    currSticker.positionLeft = String($currElement.css('left'));
+    currSticker.positionTop = String($currElement.css('top'));
+
+    saveStickersInStorage(stickers);
 }

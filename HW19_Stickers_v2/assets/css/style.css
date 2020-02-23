@@ -4,9 +4,6 @@ body {
 * {
     box-sizing: border-box;
 }
-.dialog-form {
-
-}
 .add-sticker-form {
     margin-top: 20px;
 }
@@ -38,28 +35,25 @@ body {
     text-align: right;
     padding: 20px 0;
 }
-.main-container .panel .add-btn {
-    height: 45px;
-    width: 45px;
-    font-size: 30px;
+.main-container .panel .btn {
+    padding: 15px;
+    font-size: 15px;
     font-weight: bold;
     text-transform: uppercase;
     border-radius: 22px;
     border: none;
     color: #fff;
     margin-right: 30px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.5);
 }
-.main-container .panel .add-btn:hover {
+.main-container .panel .btn:hover {
     cursor: pointer;
 }
-.main-container .panel .add-btn:focus {
+.main-container .panel .btn:focus {
     outline: none;
 }
-.main-container .content {
-    height: auto;
-}
 .main-container .content .stickers-container {
+    min-height: calc(100vh - 87px);
     padding: 20px 0;
     margin: auto;
     display: grid;
@@ -75,6 +69,11 @@ body {
     height: 250px;
     padding: 40px 20px 20px;
     border-radius: 10px;
+    cursor: grab;
+    z-index: 1;
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 .main-container .content .sticker .delete-btn {
     cursor: pointer;
@@ -101,16 +100,11 @@ body {
     JQUERY UI OVERRIDES
 =========================== */
 
-
 .ui-widget.ui-widget-content {
     border-radius: 10px;
 }
 .ui-dialog-titlebar.ui-corner-all.ui-widget-header.ui-helper-clearfix.ui-draggable-handle {
     display: none;
-}
-
-.ui-button.ui-corner-all.ui-widget.ui-button-icon-only.ui-dialog-titlebar-close {
-    /* display: none; */
 }
 
 
