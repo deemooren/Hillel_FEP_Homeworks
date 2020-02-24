@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
 
     <script src="assets/js/lib/jquery-3.4.1.min.js" defer></script>
-    <script src="assets/js/lib/jquery-ui.js" defer></script>
+    <script src="assets/js/lib/jquery-ui.min.js" defer></script>
     <script src="assets/js/script.js" defer></script>
 </head>
 <body>
@@ -19,6 +19,10 @@
             <div id="errorMessage" class="error-message hidden">You can`t create empty sticker!</div>
             <textarea name="text" id="text" placeholder="Enter your text..." cols="36" rows="10"></textarea>
         </form>
+    </div>
+
+    <div id="dialogWarning">
+        <p>You`ve created max quantity of stickers!</p>
     </div>
 
     <div class="main-container">
@@ -39,7 +43,7 @@
 
     <script type="text/template" id="stickerTemplate">
         <div class="sticker" data-id="{{id}}">
-            <textarea class="sticker-text" name="sticker-text" id="stickerText" maxlength="180">{{text}}</textarea>
+            <textarea class="sticker-text" name="sticker-text" id="stickerText">{{text}}</textarea>
             <span class="delete-btn" title="Delete sticker">&times;</span>
         </div>
     </script>
