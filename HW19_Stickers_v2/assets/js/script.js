@@ -115,11 +115,12 @@ function renderSticker(item) {
     $stickersContainer.append(newStickerHtml);
     const $newElem = $(getDOMElemByDataId(item.id));
 
-    $newElem.css('left', item.positionLeft);
-    $newElem.css('top', item.positionTop);
-
-    $newElem.css('width', item.customWidth);
-    $newElem.css('height', item.customHeight);
+    $newElem.css({
+        'left': item.positionLeft,
+        'top': item.positionTop,
+        'width': item.customWidth,
+        'height': item.customHeight
+    });
 
     refreshZIndex($newElem);
 
