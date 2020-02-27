@@ -1,0 +1,18 @@
+.contact-id {
+    display: none;
+}
+.ui-dialog .ui-dialog-titlebar {
+    background-color: #343A40;
+    color: #fff;
+}
+.tip {
+    color: red;
+}
+.hidden {
+    display: none;
+}
+.table td, 
+.table th,
+.table thead th {
+    vertical-align: middle;
+}
