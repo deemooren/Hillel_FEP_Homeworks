@@ -1,3 +1,19 @@
 body {
+    margin: 0;
+    padding: 0;
     background: #131313;
+    width: 100%;
+
+    .image {
+        width: 150px;
+        height: 150px;
+    }
+
+    #lightgallery {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+    }
 }
