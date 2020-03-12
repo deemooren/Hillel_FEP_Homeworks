@@ -8,7 +8,7 @@ var inject = require('gulp-inject');
 var series = require('stream-series');
 
 function html() {
-    var sources = gulp.src(['./dist/styles.css', './dist/vendors.js', './dist/all.js'], {
+    var sources = gulp.src(['./dist/vendors.css', './dist/styles.css', './dist/vendors.js', './dist/all.js'], {
         read: false
     });
 
@@ -26,8 +26,9 @@ function vendorsScripts() {
     return gulp.src([
         './node_modules/jquery/dist/jquery.js',
         './node_modules/lightgallery/dist/js/lightgallery.min.js',
+        './node_modules/lightgallery/modules/lg-fullscreen.min.js',
         './node_modules/lightgallery/modules/lg-thumbnail.min.js',
-        './node_modules/lightgallery/modules/lg-fullscreen.min.js'
+        './node_modules/lightgallery/modules/lg-video.js'
     ])
     .pipe(concat('vendors.js'))
     .pipe(gulp.dest('./dist'));
@@ -49,11 +50,16 @@ function vendorsStyles() {
 }
 
 function styles() {
-    return gulp.src('./src/**/styles.scss')
+    return gulp.src('./src/styles.scss')
                 .pipe(sourcemaps.init())
                     .pipe(sass())
                 .pipe(sourcemaps.write('./'))
                 .pipe(gulp.dest('./dist'));
+}
+
+function fonts() {
+    return gulp.src(['./node_modules/lightgallery/dist/fonts/*'])
+                .pipe(gulp.dest('./dist/fonts'));
 }
 
 function watchFiles() {
@@ -72,7 +78,7 @@ function serve() {
     gulp.watch('./src/**/*.scss', gulp.series(styles, browserSync.reload));
 }
 
-var build = gulp.series(html, vendorsScripts, scripts,vendorsStyles, styles);
+var build = gulp.series(html, vendorsScripts, scripts,vendorsStyles, styles, fonts);
 
 module.exports = {
     build: build,

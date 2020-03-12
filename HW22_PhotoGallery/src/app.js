@@ -1,16 +1,20 @@
 $(() => {
-    const $gallery = $('#lightgallery').lightGallery(); 
+    const $gallery = $('#lightgallery');
     const photoTemplate = $('#photoTemplate').html();
-
+    
     initial();
-
+    
     function initial() {
         api.getPhotos()
             .then(renderPhotos);
     }
-
+    
     function renderPhotos(data) {
         data.map(renderPhoto);
+        
+        $gallery.lightGallery({
+          pager: true
+        });
     }
     
     function renderPhoto(photo) {

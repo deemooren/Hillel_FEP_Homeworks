@@ -1,4 +1,4 @@
-const URL = 'https://jsonplaceholder.typicode.com/photos';
+const URL = 'https://jsonplaceholder.typicode.com/photos?_limit=50';
 
 const api = {
     getPhotos
