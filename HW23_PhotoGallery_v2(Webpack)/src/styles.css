@@ -1,0 +1,20 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #131313;
+    width: 100%;
+}
+a {
+    text-decoration: none;
+}
+.image {
+    width: 150px;
+    height: 150px;
+}
+#lightgallery {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+}
