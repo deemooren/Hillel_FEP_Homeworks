@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .done {
+            background-color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="todosContainer" class="todos-container">
+        <h1 class="title">To-do list</h1>
+
+    </div>
+
+
+    <script type="text/template" id="todoItemTemplate">
+        <li class="todoItem">{{todo}}</li>
+    </script>
+    <script type="text/template" id="todoFormTemplate" class="todo-form">
+        <form>
+            <input type="text" name="todo" id="todo">
+            <input type="submit" value="Add New Todo">
+        </form>
+    </script>
+</body>
+</html>
