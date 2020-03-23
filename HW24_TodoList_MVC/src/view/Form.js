@@ -1,5 +1,7 @@
 import { htmlToElement } from './helper';
 
+import './form.scss';
+
 export default class Form {
     constructor() {
         this.formElement = this.createForm();

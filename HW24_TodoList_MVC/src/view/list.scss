@@ -1,0 +1,17 @@
+.todos-container {
+    .todo-list {
+        list-style: none;
+        padding-left: 0;
+
+        .todo-item {
+            background-color: #ffff004d;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .todo-item.done {
+            background-color: #00800052;
+            text-decoration: line-through;
+        }
+    }
+}

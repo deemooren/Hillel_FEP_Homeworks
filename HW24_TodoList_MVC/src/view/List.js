@@ -1,5 +1,7 @@
 import { htmlToElement } from './helper';
 
+import './list.scss';
+
 export default class List {
     constructor() {
         this.listElement = document.createElement('ul');
@@ -8,6 +10,7 @@ export default class List {
 
     render(list) {
         list.map(this.renderTodoItem.bind(this));
+        this.listElement.classList.add('todo-list');
     }
 
     renderTodoItem(item) {
@@ -25,11 +28,4 @@ export default class List {
         return this.todoItemTeplate.replace('{{id}}', todo.id)
                                      .replace('{{todo}}', todo.title);
     }
-
-    // htmlToElement(html) {
-    //     const template = document.createElement('template');
-    //     template.innerHTML = html.trim();
-
-    //     return template.content.firstChild;
-    // }
 }

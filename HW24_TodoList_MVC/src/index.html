@@ -3,12 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        .done {
-            background-color: green;
-        }
-    </style>
+    <title>To-Do List</title>
 </head>
 <body>
     <div id="todosContainer" class="todos-container">
@@ -18,12 +13,12 @@
 
 
     <script type="text/template" id="todoItemTemplate">
-        <li class="todoItem">{{todo}}</li>
+        <li class="todo-item">{{todo}}</li>
     </script>
     <script type="text/template" id="todoFormTemplate" class="todo-form">
-        <form>
-            <input type="text" name="todo" id="todo">
-            <input type="submit" value="Add New Todo">
+        <form class="add-new-todo-form">
+            <input type="text" name="todo" id="todo" class="input-field">
+            <input type="submit" value="Add" class="btn">
         </form>
     </script>
 </body>

@@ -2,7 +2,6 @@ import Collection from '../model/Collection';
 import List from '../view/List';
 import Form from '../view/Form';
 
-
 export default class Controller {
     constructor() {
         this.listView = new List();
