@@ -20,7 +20,18 @@ export default class UserModel {
 
     delete() {
         return fetch(`${this.url}/${this.id}`, {
-            method: "DELETE",
+            method: 'DELETE',
         });
+    }
+
+    update() {
+        return fetch(`${this.url}/${this.id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(this)
+        })
+        .then(response => response.json());
     }
 }

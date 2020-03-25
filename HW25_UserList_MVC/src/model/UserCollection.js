@@ -1,4 +1,5 @@
 import UserModel from "./UserModel";
+import { USERS_URL } from "../config";
 
 export default class UserCollection {
     constructor(usersUrl) {
@@ -22,6 +23,32 @@ export default class UserCollection {
         const userModel = this.get(id);
 
         return userModel.delete().then(this.deleteFromList.bind(this));
+    }
+
+    add(user) {
+        return fetch(USERS_URL, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                .then(response => response.json())
+                .then(this.addUserToList.bind(this));
+    }
+
+    edit(user) {
+        const currUser = this.get(user.id);
+        currUser.setData(user);
+        
+        return currUser.update();
+    }
+
+    addUserToList(user) {
+        const userModel = new UserModel(this.url, user);
+        this.list.push(userModel);
+
+        return userModel;
     }
 
     get(id) {

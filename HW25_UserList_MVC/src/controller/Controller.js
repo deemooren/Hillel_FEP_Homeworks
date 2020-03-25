@@ -9,9 +9,24 @@ export default class Controller {
         this.listView = new ListView({
             onDelete: (id) => {
                 this.userCollection.delete(id).then(this.listView.deleteEl(id));
+            },
+            onEdit: (id) => {
+                const currUser = this.userCollection.get(id);
+                this.formView.fillFormInpts(currUser);
             }
         });
-        this.formView = new FormView();
+        this.formView = new FormView({
+            onAdd: (user) => {
+                this.userCollection.add(user)
+                                    .then((data) => this.listView.renderUser(data))
+                                    .then(this.formView.reset());
+            },
+            onSave: (user) => {
+                this.userCollection.edit(user)
+                                    .then((data) => this.listView.updateUser(data))
+                                    .then(this.formView.reset());
+            }
+        });
 
         this.container = document.querySelector('#usersTable');
 

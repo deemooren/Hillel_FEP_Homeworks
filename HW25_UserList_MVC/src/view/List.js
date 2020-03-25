@@ -19,6 +19,7 @@ export default class ListView {
                 break;
             case target.classList.contains('edit-btn'):
                 e.preventDefault();
+                this.config.onEdit(e.target.closest('.user').childNodes[1].innerText);
                 break;
         }
 
@@ -45,8 +46,21 @@ export default class ListView {
     }
 
     deleteEl(id) {
-        const currElem = document.querySelectorAll('.user-id');
-        const el = Array.prototype.find.call(currElem, item => item.innerText == id);
+        const el = this.getDOMElemById(id);
         el.parentNode.remove();
+    }
+
+    updateUser(newData) {
+        const el = this.getDOMElemById(newData.id).parentNode;
+
+        el.children[1].innerText = newData.name;
+        el.children[2].innerText = newData.surname;
+        el.children[3].innerText = newData.email;
+    }
+
+    getDOMElemById(id) {
+        const currElem = document.getElementsByClassName('user-id');
+    
+        return (Array.prototype.find.call(currElem, item => item.innerText == id));
     }
 }
