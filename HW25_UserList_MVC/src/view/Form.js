@@ -29,7 +29,6 @@ export default class FormView {
 
     getInputValues() {
         const newContact = {};
-    
         for(let i = 0; i < this.formInputs.length; i++) {
             newContact[this.formInputs[i].name] = this.formInputs[i].value.trim();
         }

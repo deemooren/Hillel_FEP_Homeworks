@@ -15,14 +15,17 @@ export default class ListView {
         switch(true) {
             case target.classList.contains('delete-btn'):
                 e.preventDefault();
-                this.config.onDelete(e.target.closest('.user').childNodes[1].innerText);
+                this.config.onDelete(this.getDOMElemById(target));
                 break;
             case target.classList.contains('edit-btn'):
                 e.preventDefault();
-                this.config.onEdit(e.target.closest('.user').childNodes[1].innerText);
+                this.config.onEdit(this.getDOMElemById(target));
                 break;
         }
+    }
 
+    getUserIdFromDOMElem(elem) {
+        return elem.closest('.user').childNodes[1].innerText;
     }
 
     render(list) {
