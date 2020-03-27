@@ -9,7 +9,7 @@ export default class List {
     }
 
     render(list) {
-        list.map(this.renderTodoItem.bind(this));
+        list.forEach(this.renderTodoItem.bind(this));
         this.listElement.classList.add('todo-list');
     }
 
