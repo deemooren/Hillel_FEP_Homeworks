@@ -6,6 +6,37 @@
     <title>Contact Book</title>
 </head>
 <body>
+    <div class="default-content-width">
+        <table class="contact-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Birth Date</th>
+                    <th colspan="2" class="search-column">
+                        <form class="search-form">
+                            <input type="text" name="template" class="search-input">
+                        </form>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+               
+            </tbody>
+        </table>
+        <button class="add-btn" title="Add New Contact"></button>
+    </div>
 
+    <script type="text/template">
+        <tr>
+            <td>{{name}}</td>
+            <td>{{phone}}</td>
+            <td>{{email}}</td>
+            <td>{{birthDate}}</td>
+            <td><button class="edit-btn" title="Edit Contact"></button></td>
+            <td><button class="delete-btn" title="Delete Contact"></button></td>
+        </tr>
+    </script>
 </body>
 </html>

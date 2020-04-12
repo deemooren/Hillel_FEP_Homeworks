@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.default-content-width {
+    width: 100vw;
+    margin: auto;
+
+    .contact-table {
+        width: 100%;
+        border-collapse: collapse;
+        
+        thead {
+            background-color: #343a40;
+            color: #fff;
+
+            .search-column {
+                width: 20%;
+                text-align: end;
+                padding-right: 30px;
+
+                .search-form {
+                    position: relative;
+                    
+                    .search-input {
+                        transition: 0.3s ease-in-out;
+                        width: 100px;
+                        border: none;
+                        border-radius: 26px;
+                        padding: 10px 30px 10px 10px;
+                        background-image: url(./images/search.png);
+                        background-position: right 5px center;
+                        background-repeat: no-repeat;
+                        background-size: 25px;
+
+                        &:focus {
+                            width: 200px;
+                        }
+                    }
+                }
+            }
+        }
+
+        tbody {
+            tr {
+                border-bottom: 2px solid #dee2e6;
+                text-align: center;
+            }
+            tr:nth-of-type(even) {
+                background-color: #f2f2f2;
+            }
+            .edit-btn,
+            .delete-btn {
+                width: 30px;
+                height: 30px;
+                background-color: transparent;
+                border: none;
+                background-size: cover;
+                background-repeat: no-repeat;
+                opacity: 0.7;
+                transition: 0.2s ease-in-out;
+
+                &:hover {
+                    cursor: pointer;
+                    opacity: 1;
+                }
+            }
+            .edit-btn {
+                background-image: url(./images/edit.png);
+            }
+            .delete-btn {
+                background-image: url(./images/delete.png);
+            }
+        }
+
+        tr {
+            th, td {
+                padding: 20px 10px;
+            }
+        }
+    }
+
+    .add-btn {
+        background: url(./images/add.png) no-repeat;
+        background-size: cover;
+        transition: 0.3s ease-in-out;
+        opacity: 0.9;
+        width: 76px;
+        height: 76px;
+        padding: 0;
+        border-radius: 38px;
+        border: none;
+        background-color: transparent;
+        position: absolute;
+            bottom: 5%;
+            right: 3%;
+
+        &:hover {
+            cursor: pointer;
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
+}
