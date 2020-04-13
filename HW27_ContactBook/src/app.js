@@ -4,11 +4,6 @@
 const contactsTableContainer = document.getElementById('contactsTableContainer');
 const modalWindowContainer = document.getElementById('modalWindowContainer');
 
-document.addEventListener("DOMContentLoaded", function(event) { 
-    setTimeout(function() {
-        document.body.classList.remove('preload');
-    });
-});
 contactsTableContainer.addEventListener('click', onContactsTableContainerClick);
 modalWindowContainer.addEventListener('click', onModalWindowContainer);
 
