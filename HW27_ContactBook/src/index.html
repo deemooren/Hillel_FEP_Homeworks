@@ -5,8 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Book</title>
 </head>
-<body>
-    <div class="default-content-width">
+<body class="preload">
+    <div class="modal-window-container" id="modalWindowContainer">
+        <div class="modal-window">
+            <form class="contact-form" id="contactForm">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" id="name">
+                </div>
+                <div>
+                    <label for="name">Surname:</label>
+                    <input type="text" name="surname" id="surname">
+                </div>
+                <div>
+                    <label for="name">Patronymic:</label>
+                    <input type="text" name="patronymic" id="patronymic">
+                </div>
+                <div>
+                    <label for="name">Phone:</label>
+                    <input type="tel" name="phone" id="phone"><span>Add phone</span>
+                </div>
+                <div>
+                    <label for="name">Email:</label>
+                    <input type="email" name="email" id="email"><span>Add email</span>
+                </div>
+                <div class="buttons">
+                    <button class="save-btn">Save</button>
+                    <button class="cancel-btn">Cancel</button>
+                </div>
+            </form>
+            <span class="close-btn">X</span>
+        </div>
+    </div>
+
+    <div class="contacts-table-container" id="contactsTableContainer">
         <table class="contact-table">
             <thead>
                 <tr>
@@ -22,7 +54,7 @@
                 </tr>
             </thead>
             <tbody>
-               
+                
             </tbody>
         </table>
         <button class="add-btn" title="Add New Contact"></button>

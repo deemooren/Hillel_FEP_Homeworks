@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+// const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -19,14 +21,13 @@ module.exports = {
                 test: /\.html$/i,
                 loader: 'html-loader'
             },
-            {
-                test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
-            },
+            // {
+            //     test: /\.scss$/,
+            //     use: ExtractTextPlugin.extract({
+            //         fallback: 'style-loader',
+            //         use: ['css-loader', 'sass-loader']
+            //     })
+            // },
             {
                 test: /\.(png|jpe?g|gif)$/i,
                 loader: 'file-loader',
@@ -38,8 +39,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            inject: 'head'
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new ScriptExtHtmlWebpackPlugin({
+            defaultAttribute: 'defer'
+        }),
+        // new ExtractTextPlugin('bundle.css')
     ]
 };
