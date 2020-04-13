@@ -1,6 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -8,10 +10,17 @@ module.exports = {
     devServer: {
         contentBase: './dist'
     },
-    entry: './src/app.js',
+    entry: {
+        'bundle.css': [
+          path.resolve(__dirname, 'src/styles.scss')
+        ],
+        'bundle.js': [
+          path.resolve(__dirname, 'src/app.js')
+        ]
+    },
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        filename: '[name]',
+        path: path.resolve(__dirname, 'dist'),
     },
     module: {
         rules: [
@@ -21,11 +30,10 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'style-loader',
-                    'css-loader',
-                    'sass-loader'
-                ]
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: ['css-loader', 'sass-loader']
+                })
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
@@ -38,8 +46,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.html',
+            inject: 'head'
         }),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new ScriptExtHtmlWebpackPlugin({
+            defaultAttribute: 'defer'
+        }),
+        new ExtractTextPlugin('bundle.css')
     ]
 };
