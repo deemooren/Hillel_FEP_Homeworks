@@ -17,7 +17,7 @@ body {
     opacity: 0;
     transition: 0.2s ease-in-out;
     pointer-events: none;
-    z-index: 2;
+    z-index: 10;
     background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
         top: 0;
@@ -66,7 +66,7 @@ body {
                         padding: 10px 20px;
                         border: none;
                         border-bottom: 2px solid #a1a1a1;
-                        width: 100%;
+                        width: 96%;
                     }
                     .add-field-btn {
                         transition: 0.2s ease-in-out;
@@ -120,19 +120,25 @@ body {
 }
 
 .contacts-table-container {
+    padding-bottom: 130px;
+    
     .contact-table {
         width: 100%;
+        min-width: 1155px;
+        max-width: 1600px;
+        margin: auto;
         border-collapse: collapse;
         
         thead {
-            position: fixed;
-                top: 0;
-            background-color: #343a40;
             color: #fff;
-            width: 100%;
-            display: table;
             z-index: 1;
 
+            th {
+                z-index: 5;
+                background-color: #343a40;
+                position: sticky;
+                    top: 0;
+            }
             .search-column {
                 width: 20%;
                 text-align: end;
@@ -165,10 +171,6 @@ body {
         }
 
         tbody {
-            display: table;
-            width: 100%;
-            margin-top: 76px;
-
             tr {
                 border-bottom: 2px solid #dee2e6;
                 text-align: center;
@@ -204,6 +206,10 @@ body {
             th, td {
                 padding: 20px 10px;
             }
+        }
+        .actions-column { 
+            display: flex;
+            justify-content: space-evenly;
         }
     }
 
