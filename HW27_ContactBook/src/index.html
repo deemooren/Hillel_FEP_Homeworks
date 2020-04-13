@@ -11,25 +11,32 @@
             <div class="form-title">Add new contact</div>
             <form class="contact-form" id="contactForm">
                 <div class="container">
+                    <input type="hidden" name="id" id="id" class="input-field">
                     <div class="input-item">
                         <label for="name">Name:</label>
-                        <input type="text" name="name" id="name">
+                        <input type="text" name="name" id="name" class="input-field">
                     </div>
                     <div class="input-item">
                         <label for="name">Surname:</label>
-                        <input type="text" name="surname" id="surname">
+                        <input type="text" name="surname" id="surname" class="input-field">
                     </div>
                     <div class="input-item">
                         <label for="name">Patronymic:</label>
-                        <input type="text" name="patronymic" id="patronymic">
+                        <input type="text" name="patronymic" id="patronymic" class="input-field">
                     </div>
-                    <div class="input-item">
+                    <div class="input-item phone-input">
                         <label for="name">Phone:</label>
-                        <input type="tel" name="phone" id="phone"><span class="add-field-btn"></span>
+                        <input type="tel" name="phone" id="phone" class="input-field">
+                        <span class="add-field-btn"></span>
+                    </div>
+                    <div class="input-item email-input">
+                        <label for="name">Email:</label>
+                        <input type="email" name="email" id="email" class="input-field">
+                        <span class="add-field-btn"></span>
                     </div>
                     <div class="input-item">
-                        <label for="name">Email:</label>
-                        <input type="email" name="email" id="email"><span class="add-field-btn"></span>
+                        <label for="birthDate">Birth Date:</label>
+                        <input type="date" name="birthDate" id="birthDate" class="input-field">
                     </div>
                 </div>
                 <button class="save-btn">Save</button>
@@ -53,22 +60,93 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
-                
+            <tbody id="contactsContainer">
+                <tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr><tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr><tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr><tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr><tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr><tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr><tr class="contact-item" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{birthDate}}</td>
+                    <td class="actions-column">
+                        <button class="edit-btn" title="Edit Contact"></button>
+                        <button class="delete-btn" title="Delete Contact"></button>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <button class="add-btn" title="Add New Contact"></button>
     </div>
 
-    <script type="text/template">
-        <tr>
+    <script type="text/template" id="contactTemplate">
+        <tr class="contact-item" data-id="{{id}}">
             <td>{{name}}</td>
             <td>{{phone}}</td>
             <td>{{email}}</td>
             <td>{{birthDate}}</td>
-            <td><button class="edit-btn" title="Edit Contact"></button></td>
-            <td><button class="delete-btn" title="Delete Contact"></button></td>
+            <td class="actions-column">
+                <button class="edit-btn" title="Edit Contact"></button>
+                <button class="delete-btn" title="Delete Contact"></button>
+            </td>
         </tr>
+    </script>
+    <script type="template/text" id="phoneInputTemplate">
+        <input type="tel" name="phone" id="phone" class="input-field">
+    </script>
+    <script type="template/text" id="emailInputTemplate">
+        <input type="email" name="email" id="email" class="input-field">
     </script>
 </body>
 </html>
