@@ -87,7 +87,7 @@ body {
             .save-btn {
                 display: block;
                 margin: 20px auto 0;
-                background-color: #a1a1a1;
+                background-color: #343a40;
                 border: none;
                 width: 100px;
                 height: 35px;
@@ -101,7 +101,7 @@ body {
     
                 &:hover {
                     cursor: pointer;
-                    background-color: #343a40;
+                    opacity: 0.8;
                 }
             }
         }

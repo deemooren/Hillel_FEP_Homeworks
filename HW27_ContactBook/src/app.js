@@ -1,5 +1,4 @@
-// import './styles.scss';
-// import api from './api';
+import api from './api';
 
 const contactsTableContainer = document.getElementById('contactsTableContainer');
 const modalWindowContainer = document.getElementById('modalWindowContainer');
