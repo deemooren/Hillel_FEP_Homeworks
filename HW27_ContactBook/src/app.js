@@ -1,8 +1,8 @@
-// import api from './api';
+import api from './api';
 
 const PHONE_INPUT_CLASS = 'phone-input';
 const EMAIL_INPUT_CLASS = 'email-input';
-const KEY_CONTACTS = 'contacts';
+const CONTACT_ITEM_CLASS = 'contact-item';
 
 const contactsContainer = document.getElementById('contactsContainer');
 const contactsTableContainer = document.getElementById('contactsTableContainer');
@@ -21,9 +21,24 @@ contactForm.addEventListener('submit', onContactFormSubmit);
 
 init();
 
+function init() {
+    getContacts();
+}
+
 function onContactsTableContainerClick(e) {
-    if(e.target.classList.contains('add-btn')) {
-        showModalWindow();
+    switch(true) {
+        case e.target.classList.contains('add-btn'): {
+            showModalWindow();
+            break;
+        }
+        case e.target.classList.contains('delete-btn'): {
+            onDeleteContactClick(e.target.closest(`.${CONTACT_ITEM_CLASS}`).dataset.id);
+            break;
+        }
+        case e.target.classList.contains('edit-btn'): {
+            onEditContactClick(e.target.closest(`.${CONTACT_ITEM_CLASS}`).dataset.id);
+            break;
+        }
     }
 }
 
@@ -42,21 +57,43 @@ function onModalWindowContainer(e) {
             parentClass = EMAIL_INPUT_CLASS;
         }
         addField(template, parentClass);
+    } else if(target.classList.contains('delete-field-btn')) {
+        target.parentNode.remove();
     }
 }
 
 function onContactFormSubmit(e) {
     e.preventDefault();
 
-    addNewContact();
+    if(formIsNotEmpty()) {
+        addNewContact();
+    } else {
+        console.log('Form is empty');
+    }
+    hideModalWindow();
 }
 
-function init() {
-    getContacts();
+function onDeleteContactClick(id) {
+    deleteContact(id);
+    removeElement(id);
+}
+
+function onEditContactClick(id) {
+    showModalWindow();
+    
+}
+
+function formIsNotEmpty() {
+    for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value.trim()) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function getContacts() {
-    let data = localStorage.getItem(KEY_CONTACTS);
+    let data = api.getContacts();
     data = data ? JSON.parse(data) : [];
 
     setContacts(data);
@@ -71,18 +108,36 @@ function renderContacts(data) {
     data.forEach(item => {
         renderContact(item);
     });
-}
+} 
 
 function renderContact(contact) {
-    console.log(contact);
     const html = contactTemplate.replace('{{id}}', contact.id)
                                 .replace('{{name}}', `${contact.surname} ${contact.name} ${contact.patronymic}`)
-                                .replace('{{phone}}', `${contact.phone}`)
-                                .replace('{{email}}', `${contact.email}`)
+                                .replace('{{phone}}', `${arrayToHtmlList(contact.phone)}`)
+                                .replace('{{email}}', `${arrayToHtmlList(contact.email)}`)
                                 .replace('{{birthDate}}', contact.birthDate);
 
     const contactElem = htmlToElement(html);
     contactsContainer.append(contactElem);
+}
+
+function arrayToHtmlList(arr) {
+    const ul = document.createElement('ul');
+    arr.forEach(item => {
+        const li = document.createElement('li');
+        li.innerText = item;
+        ul.append(li);
+    });
+    const html = elementToHtml(ul);
+
+    return html;
+}
+
+function elementToHtml(element) {
+    const div = document.createElement('div');
+    div.append(element);
+
+    return div.innerHTML;
 }
 
 function showModalWindow() {
@@ -91,6 +146,11 @@ function showModalWindow() {
 
 function hideModalWindow() {
     modalWindowContainer.classList.remove('active');
+    const customFields = document.getElementsByClassName('input-custom');
+
+    while(customFields[0]) {
+        customFields[0].parentNode.removeChild(customFields[0]);
+    }
     contactForm.reset();
 }
 
@@ -98,7 +158,8 @@ function addNewContact() {
     const newContact = createContactObj();
     newContact.id = Math.random();
     contacts.push(newContact);
-    saveDataInStorage(contacts);
+    api.saveContacts(contacts);
+    renderContact(newContact);
 }
 
 function createContactObj() {
@@ -106,6 +167,7 @@ function createContactObj() {
         phone: [],
         email: []
     };
+
     Array.prototype.forEach.call(inputs, element => {
         if(element.name === 'phone' || element.name === 'email') {
             contact[element.name].push(element.value);
@@ -129,6 +191,13 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
-function saveDataInStorage(contacts) {
-    localStorage.setItem(KEY_CONTACTS, JSON.stringify(contacts));
+function deleteContact(id) {
+    contacts = contacts.filter(item => item.id != id);
+    api.saveContacts(contacts);
+}
+
+function removeElement(id) {
+    const contactsElements = document.getElementsByClassName(CONTACT_ITEM_CLASS);
+    const currElem = Array.prototype.find.call(contactsElements, (element) => element.dataset.id == id);
+    currElem.remove();
 }

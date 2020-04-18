@@ -24,17 +24,17 @@ body {
         bottom: 0;
         left: 0;
         right: 0;
+    display: flex;
+        justify-content: center;
+        align-items: center;
 
     &.active {
         opacity: 1;
         pointer-events: auto;
         visibility: visible;
-        justify-content: center;
-        align-items: center;
     }
-    .modal-window {
+    .modal-window-form {
         z-index: 5;
-        margin: 80px auto;
         background-color: #fff;
         width: 500px;
         height: auto;
@@ -60,7 +60,7 @@ body {
                     margin-bottom: 10px;
                     position: relative;
                     display: flex;
-                    flex-flow: column;
+                        flex-flow: column;
 
                     input {
                         padding: 10px 20px;
@@ -68,6 +68,7 @@ body {
                         border-bottom: 2px solid #a1a1a1;
                         width: 96%;
                     }
+                    
                     .add-field-btn {
                         transition: 0.2s ease-in-out;
                         background: url(./images/add-field.png) no-repeat;
@@ -81,6 +82,19 @@ body {
                         &:hover {
                             cursor: pointer;
                         }
+                    }
+                    .input-custom {
+
+                        .delete-field-btn {
+                            background: url(./images/minus.png) no-repeat;
+                        }
+                    }
+                    .add-field-btn,
+                    .delete-field-btn {
+                        transition: 0.2s ease-in-out;
+                        background-size: cover;
+                        width: 20px;
+                        height: 20px;
                     }
                 }
             }
@@ -200,16 +214,18 @@ body {
             .delete-btn {
                 background-image: url(./images/delete.png);
             }
+            ul {
+                list-style: none;
+            }
         }
 
-        tr {
-            th, td {
-                padding: 20px 10px;
-            }
+
+        th, td {
+            padding: 20px 10px;
         }
         .actions-column { 
             display: flex;
-            justify-content: space-evenly;
+                justify-content: space-evenly;
         }
     }
 

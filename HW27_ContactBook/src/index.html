@@ -7,7 +7,7 @@
 </head>
 <body class="preload">
     <div class="modal-window-container" id="modalWindowContainer">
-        <div class="modal-window">
+        <div class="modal-window-form">
             <div class="form-title">Add new contact</div>
             <form class="contact-form" id="contactForm">
                 <div class="container">
@@ -24,12 +24,12 @@
                         <label for="name">Patronymic:</label>
                         <input type="text" name="patronymic" id="patronymic" class="input-field">
                     </div>
-                    <div class="input-item phone-input">
+                    <div class="input-item phone-input default-input">
                         <label for="name">Phone:</label>
                         <input type="tel" name="phone" id="phone" class="input-field">
                         <span class="add-field-btn"></span>
                     </div>
-                    <div class="input-item email-input">
+                    <div class="input-item email-input default-input">
                         <label for="name">Email:</label>
                         <input type="email" name="email" id="email" class="input-field">
                         <span class="add-field-btn"></span>
@@ -61,70 +61,7 @@
                 </tr>
             </thead>
             <tbody id="contactsContainer">
-                <tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr><tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr><tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr><tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr><tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr><tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr><tr class="contact-item" data-id="{{id}}">
-                    <td>{{name}}</td>
-                    <td>{{phone}}</td>
-                    <td>{{email}}</td>
-                    <td>{{birthDate}}</td>
-                    <td class="actions-column">
-                        <button class="edit-btn" title="Edit Contact"></button>
-                        <button class="delete-btn" title="Delete Contact"></button>
-                    </td>
-                </tr>
+                
             </tbody>
         </table>
         <button class="add-btn" title="Add New Contact"></button>
@@ -143,10 +80,16 @@
         </tr>
     </script>
     <script type="template/text" id="phoneInputTemplate">
-        <input type="tel" name="phone" id="phone" class="input-field">
+        <div class="input-custom">
+            <input type="tel" name="phone" id="phone" class="input-field">
+            <span class="delete-field-btn"></span>
+        </div>
     </script>
     <script type="template/text" id="emailInputTemplate">
-        <input type="email" name="email" id="email" class="input-field">
+        <div class="input-custom">
+            <input type="email" name="email" id="email" class="input-field">
+            <span class="delete-field-btn"></span>
+        </div>
     </script>
 </body>
 </html>
