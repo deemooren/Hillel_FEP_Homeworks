@@ -50,13 +50,10 @@ function onModalWindowContainer(e) {
         let template, parentClass;
 
         if(target.closest('.' + PHONE_INPUT_CLASS)) {
-            template = phoneInputTemplate;
-            parentClass = PHONE_INPUT_CLASS;
+            addPhoneField();
         } else if(target.closest('.' + EMAIL_INPUT_CLASS)) {
-            template = emailInputTemplate;
-            parentClass = EMAIL_INPUT_CLASS;
+            addEmailField();
         }
-        addField(template, parentClass);
     } else if(target.classList.contains('delete-field-btn')) {
         target.parentNode.remove();
     }
@@ -66,11 +63,14 @@ function onContactFormSubmit(e) {
     e.preventDefault();
 
     if(formIsNotEmpty()) {
-        addNewContact();
+        if(inputs.id.value) {
+            editContact();
+        } else {
+            addNewContact();
+        }
     } else {
-        console.log('Form is empty');
+        showMessage();
     }
-    hideModalWindow();
 }
 
 function onDeleteContactClick(id) {
@@ -79,12 +79,13 @@ function onDeleteContactClick(id) {
 }
 
 function onEditContactClick(id) {
+    const editingContact = contacts.find(contact => contact.id == id);
+    fillInForm(editingContact);
     showModalWindow();
-    
 }
 
 function formIsNotEmpty() {
-    for(let i = 0; i < inputs.length; i++) {
+    for(let i = 1; i < inputs.length; i++) {
         if(inputs[i].value.trim()) {
             return true;
         }
@@ -121,6 +122,27 @@ function renderContact(contact) {
     contactsContainer.append(contactElem);
 }
 
+function fillInForm(contact) {
+    for(const key in contact) {
+        if(key === 'phone' || key === 'email') {
+            inputs[key].value = contact[key][0];
+            if(contact[key].length > 1) {
+                for(let i = 1; i < contact[key].length; i++) {
+                    let newField;
+                    if(key === 'phone') {
+                        newField = addPhoneField();
+                    } else if(key === 'email') {
+                        newField = addEmailField();
+                    }
+                    newField.children[0].value = contact[key][i];
+                }
+            }
+        } else {
+            inputs[key].value = contact[key];
+        }
+    }
+}
+
 function arrayToHtmlList(arr) {
     const ul = document.createElement('ul');
     arr.forEach(item => {
@@ -138,6 +160,23 @@ function elementToHtml(element) {
     div.append(element);
 
     return div.innerHTML;
+}
+
+function editContact() {
+    contacts = contacts.filter(contact => contact.id != inputs[0].value);
+    const newContact = createContactObj();
+    contacts.push(newContact);
+    api.saveContacts(contacts);
+    refreshCurentContact(newContact);
+    hideModalWindow();
+}
+
+function refreshCurentContact(contact) {
+    const elem = getCurrentContactElem(contact.id);
+    elem.children[0].innerText = `${contact.surname} ${contact.name} ${contact.patronymic}`;
+    elem.children[1].innerHTML = `${arrayToHtmlList(contact.phone)}`;
+    elem.children[2].innerHTML = `${arrayToHtmlList(contact.email)}`;
+    elem.children[3].innerText = contact.birthDate;
 }
 
 function showModalWindow() {
@@ -160,6 +199,7 @@ function addNewContact() {
     contacts.push(newContact);
     api.saveContacts(contacts);
     renderContact(newContact);
+    hideModalWindow();
 }
 
 function createContactObj() {
@@ -179,9 +219,21 @@ function createContactObj() {
     return contact;
 }
 
+function addPhoneField() {
+    const newField = addField(phoneInputTemplate, PHONE_INPUT_CLASS);
+    return newField;
+}
+
+function addEmailField() {
+    const newField = addField(emailInputTemplate, EMAIL_INPUT_CLASS);
+    return newField;
+}
+
 function addField(htmlTemplate, parentClass) {
     const element = htmlToElement(htmlTemplate);
     document.querySelector('.' + parentClass).append(element);
+
+    return element;
 }
 
 function htmlToElement(html) {
@@ -197,7 +249,39 @@ function deleteContact(id) {
 }
 
 function removeElement(id) {
+    const currElem = getCurrentContactElem(id);
+    currElem.remove();
+}
+
+function getCurrentContactElem(id) {
     const contactsElements = document.getElementsByClassName(CONTACT_ITEM_CLASS);
     const currElem = Array.prototype.find.call(contactsElements, (element) => element.dataset.id == id);
-    currElem.remove();
+
+    return currElem;
+}
+
+function showMessage() {
+    hideModalForm();
+    activateModalMessage();
+}
+
+function hideModalForm() {
+    document.getElementById('modalWindowForm').classList.add('hidden');
+}
+
+function activeModalForm() {
+    document.getElementById('modalWindowForm').classList.remove('hidden');
+}
+
+function activateModalMessage() {
+    const messageElem = document.getElementById('modalMessage');
+    messageElem.innerText = 'Contact hasn`t been saved. All fields were empty.';
+    messageElem.classList.add('active');
+    setTimeout(function() {
+        hideModalWindow();
+    }, 1500);
+    setTimeout(function() {
+        messageElem.classList.remove('active');
+        activeModalForm();
+    }, 2000);
 }

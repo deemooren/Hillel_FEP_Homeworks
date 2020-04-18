@@ -5,43 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Book</title>
 </head>
-<body class="preload">
+<body>
     <div class="modal-window-container" id="modalWindowContainer">
-        <div class="modal-window-form">
-            <div class="form-title">Add new contact</div>
-            <form class="contact-form" id="contactForm">
-                <div class="container">
-                    <input type="hidden" name="id" id="id" class="input-field">
-                    <div class="input-item">
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" id="name" class="input-field">
+        <div class="flex-wrapper">
+            <div class="modal-window-form" id="modalWindowForm">
+                <div class="form-title">Add new contact</div>
+                <form class="contact-form" id="contactForm">
+                    <div class="container">
+                        <input type="hidden" name="id" id="id" class="input-field">
+                        <div class="input-item">
+                            <label for="name">Name:</label>
+                            <input type="text" name="name" id="name" class="input-field">
+                        </div>
+                        <div class="input-item">
+                            <label for="name">Surname:</label>
+                            <input type="text" name="surname" id="surname" class="input-field">
+                        </div>
+                        <div class="input-item">
+                            <label for="name">Patronymic:</label>
+                            <input type="text" name="patronymic" id="patronymic" class="input-field">
+                        </div>
+                        <div class="input-item phone-input default-input">
+                            <label for="name">Phone:</label>
+                            <input type="tel" name="phone" id="phone" class="input-field">
+                            <span class="add-field-btn"></span>
+                        </div>
+                        <div class="input-item email-input default-input">
+                            <label for="name">Email:</label>
+                            <input type="email" name="email" id="email" class="input-field">
+                            <span class="add-field-btn"></span>
+                        </div>
+                        <div class="input-item">
+                            <label for="birthDate">Birth Date:</label>
+                            <input type="date" name="birthDate" id="birthDate" class="input-field">
+                        </div>
                     </div>
-                    <div class="input-item">
-                        <label for="name">Surname:</label>
-                        <input type="text" name="surname" id="surname" class="input-field">
-                    </div>
-                    <div class="input-item">
-                        <label for="name">Patronymic:</label>
-                        <input type="text" name="patronymic" id="patronymic" class="input-field">
-                    </div>
-                    <div class="input-item phone-input default-input">
-                        <label for="name">Phone:</label>
-                        <input type="tel" name="phone" id="phone" class="input-field">
-                        <span class="add-field-btn"></span>
-                    </div>
-                    <div class="input-item email-input default-input">
-                        <label for="name">Email:</label>
-                        <input type="email" name="email" id="email" class="input-field">
-                        <span class="add-field-btn"></span>
-                    </div>
-                    <div class="input-item">
-                        <label for="birthDate">Birth Date:</label>
-                        <input type="date" name="birthDate" id="birthDate" class="input-field">
-                    </div>
-                </div>
-                <button class="save-btn">Save</button>
-            </form>
-            <span class="close-btn">&times</span>
+                    <button class="save-btn">Save</button>
+                </form>
+                <span class="close-btn">&times</span>
+            </div>
+            <div class="modal-message" id="modalMessage">
+            </div>
         </div>
     </div>
 
@@ -67,6 +71,7 @@
         <button class="add-btn" title="Add New Contact"></button>
     </div>
 
+    
     <script type="text/template" id="contactTemplate">
         <tr class="contact-item" data-id="{{id}}">
             <td>{{name}}</td>

@@ -10,6 +10,26 @@ body {
     box-sizing: border-box;
 }
 
+.modal-message {
+    transition: 0.3s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px 30px;
+    position: absolute;
+        top: 50%;
+
+    &.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
 .modal-window-container {
     overflow: auto;
     visibility: hidden;
@@ -24,16 +44,19 @@ body {
         bottom: 0;
         left: 0;
         right: 0;
-    display: flex;
-        justify-content: center;
-        align-items: center;
-
+        
+    .flex-wrapper {
+        display: flex;
+            justify-content: center;
+            align-items: center;
+    }
     &.active {
         opacity: 1;
         pointer-events: auto;
         visibility: visible;
     }
     .modal-window-form {
+        margin: 20px 0;
         z-index: 5;
         background-color: #fff;
         width: 500px;
@@ -41,6 +64,9 @@ body {
         border-radius: 10px;
         position: relative;
 
+        &.hidden {
+            display: none;
+        }
         .form-title {
             color: #343a40;
             text-transform: uppercase;
@@ -84,17 +110,28 @@ body {
                         }
                     }
                     .input-custom {
+                        position: relative;
 
-                        .delete-field-btn {
-                            background: url(./images/minus.png) no-repeat;
+                        &:hover .delete-field-btn {
+                            visibility: visible;
+                            opacity: 1;
                         }
-                    }
-                    .add-field-btn,
-                    .delete-field-btn {
-                        transition: 0.2s ease-in-out;
-                        background-size: cover;
-                        width: 20px;
-                        height: 20px;
+                        .delete-field-btn {
+                            position: absolute;
+                                top: 12px;
+                                right: -6px;
+                            background: url(./images/minus.png) no-repeat;
+                            transition: 0.2s ease-in-out;
+                            background-size: cover;
+                            width: 20px;
+                            height: 20px;
+                            opacity: 0;
+                            visibility: hidden;
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
                     }
                 }
             }
