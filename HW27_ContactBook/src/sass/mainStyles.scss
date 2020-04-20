@@ -249,29 +249,25 @@ body {
                 padding-right: 30px;
                 padding: 20px;
                 position: relative;
-
-                // .search-form {
-                //     height: 36px;
                     
-                    .search-input {
-                        transition: 0.3s ease-in-out;
-                        width: 100px;
-                        border: none;
-                        border-radius: 26px;
-                        padding: 10px 30px 10px 10px;
-                        background-image: url(./images/search.png);
-                        background-position: right 5px center;
-                        background-repeat: no-repeat;
-                        background-size: 25px;
-                        position: absolute;
-                            right: 30px;
-                            top: 10px;
+                .search-input {
+                    transition: 0.3s ease-in-out;
+                    width: 100px;
+                    border: none;
+                    border-radius: 26px;
+                    padding: 10px 30px 10px 10px;
+                    background-image: url(./images/search.png);
+                    background-position: right 5px center;
+                    background-repeat: no-repeat;
+                    background-size: 25px;
+                    position: absolute;
+                        right: 30px;
+                        top: 10px;
 
-                        &:focus {
-                            width: 200px;
-                        }
+                    &:focus {
+                        width: 200px;
                     }
-                // }
+                }
             }
         }
 

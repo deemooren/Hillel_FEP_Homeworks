@@ -98,12 +98,9 @@ function onSearchInput(e) {
 function isMatch(contact, text) {
     text = text.toLowerCase();
     for(let key in contact) {
-        let property;
-        if(typeof(contact[key] == Object)) {
-            property = String(contact[key]).toLowerCase();
-            if(property.indexOf(text) !== -1) {
-                return true;
-            }
+        let property = String(contact[key]).toLowerCase();
+        if(property.indexOf(text) !== -1) {
+            return true;
         }
     }
     return false;
@@ -149,7 +146,7 @@ function renderContact(contact) {
 
 function fillInForm(contact) {
     for(const key in contact) {
-        if(key === 'phone' || key === 'email') {
+        if((key === 'phone' || key === 'email') && contact[key].length > 0) {
             inputs[key].value = contact[key][0];
             if(contact[key].length > 1) {
                 for(let i = 1; i < contact[key].length; i++) {
@@ -290,7 +287,9 @@ function createContactObj() {
 
     Array.prototype.forEach.call(inputs, element => {
         if(element.name === 'phone' || element.name === 'email') {
-            contact[element.name].push(element.value);
+            if(element.value.trim()) {
+                contact[element.name].push(element.value);
+            }
         } else {
             contact[element.name] = element.value;
         }
