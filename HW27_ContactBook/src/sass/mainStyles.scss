@@ -1,5 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
 
+$primaryDark: #343a40;
+
+@mixin setBackground($url, $size: cover) {
+    background-image: url($url);
+    background-repeat: no-repeat;
+    background-size: $size;
+}
+
+@mixin setSize($width, $height) {
+    width: $width;
+    height: $height;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -22,7 +35,7 @@ body {
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
-        position: absolute;
+        position: fixed;
             left: 0;
             bottom: 5%;
     
@@ -41,16 +54,12 @@ body {
                 margin: 5px 0;
             }
             .cake-icon {
-                width: 60px;
-                height: 60px;
+                @include setSize(60px, 60px);
                 margin-right: 20px;
             }
             .open-hide-spoiler-btn {
-                width: 10px;
-                height: 10px;
-                background-image: url(./images/extend.png);
-                background-repeat: no-repeat;
-                background-size: cover;
+                @include setBackground('./images/extend.png');
+                @include setSize(10px, 10px);
                 position: absolute;
                     right: 3px;
                     bottom: calc(50% - 7px);
@@ -85,8 +94,8 @@ body {
 
 .modal-window-container {
     overflow: auto;
-    visibility: hidden;
     pointer-events: none;
+    visibility: hidden;
     opacity: 0;
     transition: 0.2s ease-in-out;
     pointer-events: none;
@@ -112,8 +121,7 @@ body {
         margin: 20px 0;
         z-index: 5;
         background-color: #fff;
-        width: 500px;
-        height: auto;
+        @include setSize(500px, auto);
         border-radius: 10px;
         position: relative;
 
@@ -121,7 +129,7 @@ body {
             display: none;
         }
         .form-title {
-            color: #343a40;
+            color: $primaryDark;
             text-transform: uppercase;
             text-align: center;
             font-size: 20px;
@@ -132,7 +140,7 @@ body {
         }
         .contact-form {
             padding: 25px;
-            color: #343a40;
+            color: $primaryDark;
             
             .container {
                 .id-input {
@@ -156,10 +164,8 @@ body {
                     }
                     .add-field-btn {
                         transition: 0.2s ease-in-out;
-                        background: url(./images/add-field.png) no-repeat;
-                        background-size: cover;
-                        width: 20px;
-                        height: 20px;
+                        @include setBackground('./images/add-field.png');
+                        @include setSize(20px, 20px);
                         position: absolute;
                             top: 8px;
                             right: -5px;
@@ -179,11 +185,9 @@ body {
                             position: absolute;
                                 top: 12px;
                                 right: -6px;
-                            background: url(./images/minus.png) no-repeat;
+                            @include setBackground('./images/minus.png');
+                            @include setSize(20px, 20px);
                             transition: 0.2s ease-in-out;
-                            background-size: cover;
-                            width: 20px;
-                            height: 20px;
                             opacity: 0;
                             visibility: hidden;
 
@@ -195,12 +199,11 @@ body {
                 }
             }
             .save-btn {
+                @include setSize(100px, 35px);
                 display: block;
                 margin: 20px auto 0;
-                background-color: #343a40;
+                background-color: $primaryDark;
                 border: none;
-                width: 100px;
-                height: 35px;
                 padding: 10px 20px;
                 border-radius: 20px;
                 color: #fff;
@@ -245,7 +248,7 @@ body {
 
             th {
                 z-index: 5;
-                background-color: #343a40;
+                background-color: $primaryDark;
                 position: sticky;
                     top: 0;
             }
@@ -255,20 +258,17 @@ body {
                 padding: 20px;
 
                 .search-wrapper {
-                    width: 100%;
-                    height: 100%;
+                    @include setSize(100%, 100%);
                     position: relative;
 
                     .search-input {
+                        @include setBackground('./images/search.png', 25px);
+                        background-position: right 5px center;
                         transition: 0.3s ease-in-out;
                         width: 100px;
                         border: none;
                         border-radius: 26px;
                         padding: 10px 30px 10px 10px;
-                        background-image: url(./images/search.png);
-                        background-position: right 5px center;
-                        background-repeat: no-repeat;
-                        background-size: 25px;
                         position: absolute;
                             right: 35px;
                             top: -15px;
@@ -291,12 +291,9 @@ body {
             }
             .edit-btn,
             .delete-btn {
-                width: 30px;
-                height: 30px;
                 background-color: transparent;
+                @include setSize(30px, 30px);
                 border: none;
-                background-size: cover;
-                background-repeat: no-repeat;
                 opacity: 0.7;
                 transition: 0.2s ease-in-out;
 
@@ -306,10 +303,10 @@ body {
                 }
             }
             .edit-btn {
-                background-image: url(./images/edit.png);
+                @include setBackground('./images/edit.png');
             }
             .delete-btn {
-                background-image: url(./images/delete.png);
+                @include setBackground('./images/delete.png');
             }
             ul {
                 list-style: none;
@@ -328,15 +325,13 @@ body {
     }
 
     .add-btn {
-        background: url(./images/add.png) no-repeat;
-        background-size: cover;
+        @include setSize(76px, 76px);
+        @include setBackground('./images/add.png');
+        background-color: transparent;
         transition: 0.3s ease-in-out;
-        width: 76px;
-        height: 76px;
         padding: 0;
         border-radius: 38px;
         border: none;
-        background-color: transparent;
         position: fixed;
             bottom: 5%;
             right: 3%;

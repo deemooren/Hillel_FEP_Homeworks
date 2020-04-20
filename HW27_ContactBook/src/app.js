@@ -237,9 +237,9 @@ function elementToHtml(element) {
 }
 
 function editContact() {
-    contacts = contacts.filter(contact => contact.id != inputs[0].value);
     const newContact = createContactObj();
-    contacts.push(newContact);
+    const contact = contacts.find(contact => contact.id == inputs[0].value);
+    Object.assign(contact, newContact);
     api.saveContacts(contacts);
     refreshCurentContact(newContact);
     hideModalWindow();
