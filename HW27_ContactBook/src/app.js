@@ -6,6 +6,7 @@ const CONTACT_ITEM_CLASS = 'contact-item';
 
 const searchInput = document.getElementById('searchInput');
 const contactsContainer = document.getElementById('contactsContainer');
+const formTitle = document.getElementById('formTitle');
 const contactsTableContainer = document.getElementById('contactsTableContainer');
 const modalWindowContainer = document.getElementById('modalWindowContainer');
 const contactForm = document.getElementById('contactForm');
@@ -253,12 +254,14 @@ function refreshCurentContact(contact) {
 }
 
 function showModalWindow() {
+    formTitle.innerText = inputs[0].value ? 'Edit contact' : 'Add new contact';
     modalWindowContainer.classList.add('active');
 }
 
 function hideModalWindow() {
     modalWindowContainer.classList.remove('active');
     resetToCustomConfig();
+    contactForm.reset();
 }
 
 function resetToCustomConfig() {
@@ -267,7 +270,6 @@ function resetToCustomConfig() {
     while(customFields[0]) {
         customFields[0].parentNode.removeChild(customFields[0]);
     }
-    contactForm.reset();
 }
 
 function addNewContact() {

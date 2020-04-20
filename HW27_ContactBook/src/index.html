@@ -19,10 +19,10 @@
     <div class="modal-window-container" id="modalWindowContainer">
         <div class="flex-wrapper">
             <div class="modal-window-form" id="modalWindowForm">
-                <div class="form-title">Add new contact</div>
+                <div class="form-title" id="formTitle"></div>
                 <form class="contact-form" id="contactForm">
                     <div class="container">
-                        <input type="hidden" name="id" id="id" class="input-field">
+                        <input name="id" id="id" class="input-field id-input">
                         <div class="input-item">
                             <label for="name">Name:</label>
                             <input type="text" name="name" id="name" class="input-field">
@@ -67,8 +67,10 @@
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Birth Date</th>
-                    <th colspan="2" class="search-column">
-                        <input id="searchInput" type="text" name="template" class="search-input">
+                    <th class="search-column">
+                        <div class="search-wrapper">
+                            <input id="searchInput" type="text" name="template" class="search-input">
+                        </div>
                     </th>
                 </tr>
             </thead>
@@ -87,8 +89,8 @@
             <td>{{email}}</td>
             <td>{{birthDate}}</td>
             <td class="actions-column">
-                <button class="edit-btn" title="Edit Contact"></button>
-                <button class="delete-btn" title="Delete Contact"></button>
+                <button class="edit-btn action-btn" title="Edit Contact"></button>
+                <button class="delete-btn action-btn" title="Delete Contact"></button>
             </td>
         </tr>
     </script>
