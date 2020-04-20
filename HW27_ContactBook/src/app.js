@@ -4,6 +4,7 @@ const PHONE_INPUT_CLASS = 'phone-input';
 const EMAIL_INPUT_CLASS = 'email-input';
 const CONTACT_ITEM_CLASS = 'contact-item';
 
+const searchInput = document.getElementById('searchInput');
 const contactsContainer = document.getElementById('contactsContainer');
 const contactsTableContainer = document.getElementById('contactsTableContainer');
 const modalWindowContainer = document.getElementById('modalWindowContainer');
@@ -12,17 +13,20 @@ const inputs = document.getElementsByClassName('input-field');
 const phoneInputTemplate = document.getElementById('phoneInputTemplate').innerHTML;
 const emailInputTemplate = document.getElementById('emailInputTemplate').innerHTML;
 const contactTemplate = document.getElementById('contactTemplate').innerHTML;
+let birthDatesBlock = null;
 
 let contacts = [];
 
 contactsTableContainer.addEventListener('click', onContactsTableContainerClick);
 modalWindowContainer.addEventListener('click', onModalWindowContainer);
 contactForm.addEventListener('submit', onContactFormSubmit);
+searchInput.addEventListener('input', onSearchInput);
 
 init();
 
 function init() {
     getContacts();
+    checkBirthDates();
 }
 
 function onContactsTableContainerClick(e) {
@@ -84,6 +88,27 @@ function onEditContactClick(id) {
     showModalWindow();
 }
 
+function onSearchInput(e) {
+    const text = e.target.value.trim();
+    contactsContainer.innerHTML = '';
+    const matches = contacts.filter(contact => isMatch(contact, text));
+    renderContacts(matches);
+}
+
+function isMatch(contact, text) {
+    text = text.toLowerCase();
+    for(let key in contact) {
+        let property;
+        if(typeof(contact[key] == Object)) {
+            property = String(contact[key]).toLowerCase();
+            if(property.indexOf(text) !== -1) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
 function formIsNotEmpty() {
     for(let i = 1; i < inputs.length; i++) {
         if(inputs[i].value.trim()) {
@@ -143,6 +168,57 @@ function fillInForm(contact) {
     }
 }
 
+function checkBirthDates() {
+    const now = new Date();
+    const birthdayPeople = getBirthdayPeople();
+
+    if(birthdayPeople.length > 0) {
+        showBirthdaysSpoiler();
+        bindCallbacks();
+        showNamesInBirthdayList(birthdayPeople);
+    }
+}
+
+function getBirthdayPeople() {
+    const now = new Date();
+    let birthdayPeople = [];
+
+    contacts.forEach(contact => {
+        const birthDate = new Date(contact.birthDate);
+        if(now.getDate() === birthDate.getDate() && now.getMonth() === birthDate.getMonth()) {
+            birthdayPeople.push(contact);
+        }
+    });
+
+    return birthdayPeople;
+}
+
+function showBirthdaysSpoiler() {
+    birthDatesBlock = document.getElementById('birthDatesBlock');
+    birthDatesBlock.classList.add('actual');
+}
+
+function bindCallbacks() {
+    birthDatesBlock.addEventListener('click', onBirthDatesBlockClick);
+}
+
+function onBirthDatesBlockClick(e) {
+    if(e.target.classList.contains('open-hide-spoiler-btn')) {
+        birthDatesBlock.classList.toggle('twisted');
+    }
+}
+
+function showNamesInBirthdayList(list) {
+    const birthdayList = document.getElementById('birthdayList');
+
+    for(let i = 0; i < list.length; i++) {
+        if(i > 0) {
+            birthdayList.innerHTML += ', ';
+        }
+        birthdayList.innerHTML += `<span class="birthday-person">${list[i].surname} ${list[i].name} ${list[i].patronymic}</span>`;
+    }
+}
+
 function arrayToHtmlList(arr) {
     const ul = document.createElement('ul');
     arr.forEach(item => {
@@ -185,6 +261,10 @@ function showModalWindow() {
 
 function hideModalWindow() {
     modalWindowContainer.classList.remove('active');
+    resetToCustomConfig();
+}
+
+function resetToCustomConfig() {
     const customFields = document.getElementsByClassName('input-custom');
 
     while(customFields[0]) {

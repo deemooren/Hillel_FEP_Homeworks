@@ -10,6 +10,59 @@ body {
     box-sizing: border-box;
 }
 
+.birth-dates-block {
+    display: none;
+
+    &.actual {
+        z-index: 10;
+        background-color: #fff;
+        display: block;
+        width: 270px;
+        transition: 0.4s ease-in-out;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+        box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+        position: absolute;
+            left: 0;
+            bottom: 5%;
+    
+    
+        &.twisted {
+            left: -250px;
+        }
+        .wrapper {
+            padding: 15px 30px;
+            width: 100%;
+            position: relative;
+            display: flex;
+                align-content: center;
+    
+            .text h4 {
+                margin: 5px 0;
+            }
+            .cake-icon {
+                width: 60px;
+                height: 60px;
+                margin-right: 20px;
+            }
+            .open-hide-spoiler-btn {
+                width: 10px;
+                height: 10px;
+                background-image: url(./images/extend.png);
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: absolute;
+                    right: 3px;
+                    bottom: calc(50% - 7px);
+    
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
 .modal-message {
     transition: 0.3s ease-in-out;
     opacity: 0;
@@ -194,10 +247,11 @@ body {
                 width: 20%;
                 text-align: end;
                 padding-right: 30px;
+                padding: 20px;
+                position: relative;
 
-                .search-form {
-                    position: relative;
-                    height: 36px;
+                // .search-form {
+                //     height: 36px;
                     
                     .search-input {
                         transition: 0.3s ease-in-out;
@@ -210,14 +264,14 @@ body {
                         background-repeat: no-repeat;
                         background-size: 25px;
                         position: absolute;
-                            right: 0;
-                            top: 0;
+                            right: 30px;
+                            top: 10px;
 
                         &:focus {
                             width: 200px;
                         }
                     }
-                }
+                // }
             }
         }
 

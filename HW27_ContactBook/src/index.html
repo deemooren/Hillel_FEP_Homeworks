@@ -6,6 +6,16 @@
     <title>Contact Book</title>
 </head>
 <body>
+    <div class="birth-dates-block" id="birthDatesBlock">
+        <div class="wrapper">
+            <img class="cake-icon" src="./images/birthday.png">
+            <div class="text">
+                <h4>Today is birthday:</h4>
+                <div id="birthdayList"></div>
+                <span class="open-hide-spoiler-btn"></span>
+            </div>
+        </div>
+    </div>
     <div class="modal-window-container" id="modalWindowContainer">
         <div class="flex-wrapper">
             <div class="modal-window-form" id="modalWindowForm">
@@ -58,9 +68,7 @@
                     <th>Email</th>
                     <th>Birth Date</th>
                     <th colspan="2" class="search-column">
-                        <form class="search-form">
-                            <input type="text" name="template" class="search-input">
-                        </form>
+                        <input id="searchInput" type="text" name="template" class="search-input">
                     </th>
                 </tr>
             </thead>
@@ -71,7 +79,7 @@
         <button class="add-btn" title="Add New Contact"></button>
     </div>
 
-    
+
     <script type="text/template" id="contactTemplate">
         <tr class="contact-item" data-id="{{id}}">
             <td>{{name}}</td>
