@@ -19,7 +19,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "lg-fullscreen": "^1.1.0",
     "lg-pager": "^1.0.2",
     "lg-thumbnail": "^1.1.0",
