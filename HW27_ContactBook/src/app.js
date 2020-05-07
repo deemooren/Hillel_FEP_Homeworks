@@ -118,8 +118,9 @@ function formIsNotEmpty() {
 
 function getContacts() {
     let data = api.getContacts();
-    data = data ? JSON.parse(data) : [];
-
+    if(!data) {
+        data = [];
+    }
     setContacts(data);
     renderContacts(data);
 }
@@ -167,7 +168,6 @@ function fillInForm(contact) {
 }
 
 function checkBirthDates() {
-    const now = new Date();
     const birthdayPeople = getBirthdayPeople();
 
     if(birthdayPeople.length > 0) {
@@ -179,12 +179,10 @@ function checkBirthDates() {
 
 function getBirthdayPeople() {
     const now = new Date();
-    let birthdayPeople = [];
-
-    contacts.forEach(contact => {
+    let birthdayPeople = contacts.filter(contact=> {
         const birthDate = new Date(contact.birthDate);
         if(now.getDate() === birthDate.getDate() && now.getMonth() === birthDate.getMonth()) {
-            birthdayPeople.push(contact);
+            return contact;
         }
     });
 
@@ -301,13 +299,11 @@ function createContactObj() {
 }
 
 function addPhoneField() {
-    const newField = addField(phoneInputTemplate, PHONE_INPUT_CLASS);
-    return newField;
+    return addField(phoneInputTemplate, PHONE_INPUT_CLASS);
 }
 
 function addEmailField() {
-    const newField = addField(emailInputTemplate, EMAIL_INPUT_CLASS);
-    return newField;
+    return addField(emailInputTemplate, EMAIL_INPUT_CLASS);
 }
 
 function addField(htmlTemplate, parentClass) {

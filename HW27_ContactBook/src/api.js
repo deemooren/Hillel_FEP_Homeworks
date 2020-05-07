@@ -6,7 +6,7 @@ export default {
 };
 
 function getContacts() {
-    return localStorage.getItem(KEY_CONTACTS);
+    return JSON.parse(localStorage.getItem(KEY_CONTACTS));
 }
 
 function saveContacts(contacts) {
