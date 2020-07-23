@@ -5,11 +5,6 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    mode: 'development',
-    devtool: 'inline-source-map',
-    devServer: {
-        contentBase: './dist'
-    },
     entry: {
         'bundle.css': [
           path.resolve(__dirname, 'src/styles.scss')
