@@ -101,7 +101,6 @@ body {
     pointer-events: none;
     visibility: hidden;
     opacity: 0;
-    transition: 0.2s ease-in-out;
     pointer-events: none;
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.7);
@@ -267,7 +266,6 @@ body {
                     .search-input {
                         @include setBackground('./images/search.png', 25px);
                         background-position: right 5px center;
-                        transition: 0.3s ease-in-out;
                         width: 100px;
                         border: none;
                         border-radius: 26px;

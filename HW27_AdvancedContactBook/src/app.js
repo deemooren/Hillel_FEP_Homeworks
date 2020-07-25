@@ -18,6 +18,7 @@ let birthDatesBlock = null;
 
 let contacts = [];
 
+window.onload = setTransitions();
 contactsTableContainer.addEventListener('click', onContactsTableContainerClick);
 modalWindowContainer.addEventListener('click', onModalWindowContainer);
 contactForm.addEventListener('submit', onContactFormSubmit);
@@ -27,7 +28,6 @@ init();
 
 function init() {
     getContacts();
-    checkBirthDates();
 }
 
 function onContactsTableContainerClick(e) {
@@ -96,6 +96,11 @@ function onSearchInput(e) {
     renderContacts(matches);
 }
 
+function setTransitions() {
+    modalWindowContainer.style.transition = '0.2s ease-in-out';
+    document.querySelector('.search-input').style.transition = '0.3s ease-in-out';
+}
+
 function isMatch(contact, text) {
     text = text.toLowerCase();
     for(let key in contact) {
@@ -117,16 +122,14 @@ function formIsNotEmpty() {
 }
 
 function getContacts() {
-    let data = api.getContacts();
-    if(!data) {
-        data = [];
-    }
-    setContacts(data);
-    renderContacts(data);
+    let data = api.getContacts()
+                .then(setContacts)
+                .then(renderContacts)
+                .then(checkBirthDates);
 }
 
 function setContacts(data) {
-    return (contacts = data);
+    return (contacts = data ? data : []);
 }
 
 function renderContacts(data) {
@@ -138,8 +141,8 @@ function renderContacts(data) {
 function renderContact(contact) {
     const html = contactTemplate.replace('{{id}}', contact.id)
                                 .replace('{{name}}', `${contact.surname} ${contact.name} ${contact.patronymic}`)
-                                .replace('{{phone}}', `${arrayToHtmlList(contact.phone)}`)
-                                .replace('{{email}}', `${arrayToHtmlList(contact.email)}`)
+                                .replace('{{phone}}', `${contact.phone ? arrayToHtmlList(contact.phone) : ''}`)
+                                .replace('{{email}}', `${contact.email ? arrayToHtmlList(contact.email) : ''}`)
                                 .replace('{{birthDate}}', contact.birthDate);
 
     const contactElem = htmlToElement(html);
@@ -179,7 +182,7 @@ function checkBirthDates() {
 
 function getBirthdayPeople() {
     const now = new Date();
-    let birthdayPeople = contacts.filter(contact=> {
+    const birthdayPeople = contacts.filter(contact => {
         const birthDate = new Date(contact.birthDate);
         if(now.getDate() === birthDate.getDate() && now.getMonth() === birthDate.getMonth()) {
             return contact;
@@ -236,11 +239,18 @@ function elementToHtml(element) {
 
 function editContact() {
     const newContact = createContactObj();
+
+    api.editContact(newContact)
+        .then(updateContactInArray)
+        .then(refreshCurentContact)
+        .then(hideModalWindow);
+}
+
+function updateContactInArray(newContact) {
     const contact = contacts.find(contact => contact.id == inputs[0].value);
     Object.assign(contact, newContact);
-    api.saveContacts(contacts);
-    refreshCurentContact(newContact);
-    hideModalWindow();
+    
+    return contact;
 }
 
 function refreshCurentContact(contact) {
@@ -272,11 +282,10 @@ function resetToCustomConfig() {
 
 function addNewContact() {
     const newContact = createContactObj();
-    newContact.id = Math.random();
     contacts.push(newContact);
-    api.saveContacts(contacts);
-    renderContact(newContact);
-    hideModalWindow();
+    api.addContact(newContact)
+        .then(renderContact)
+        .then(hideModalWindow);
 }
 
 function createContactObj() {
@@ -321,8 +330,12 @@ function htmlToElement(html) {
 }
 
 function deleteContact(id) {
+    api.deleteContact(id)
+        .then(deleteContactFromArray);
+}
+
+function deleteContactFromArray(id) {
     contacts = contacts.filter(item => item.id != id);
-    api.saveContacts(contacts);
 }
 
 function removeElement(id) {
