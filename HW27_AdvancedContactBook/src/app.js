@@ -14,11 +14,12 @@ const inputs = document.getElementsByClassName('input-field');
 const phoneInputTemplate = document.getElementById('phoneInputTemplate').innerHTML;
 const emailInputTemplate = document.getElementById('emailInputTemplate').innerHTML;
 const contactTemplate = document.getElementById('contactTemplate').innerHTML;
+let spinner;
 let birthDatesBlock = null;
 
 let contacts = [];
 
-window.onload = setTransitions();
+window.onload = setTransitions;
 contactsTableContainer.addEventListener('click', onContactsTableContainerClick);
 modalWindowContainer.addEventListener('click', onModalWindowContainer);
 contactForm.addEventListener('submit', onContactFormSubmit);
@@ -27,6 +28,7 @@ searchInput.addEventListener('input', onSearchInput);
 init();
 
 function init() {
+    showSpinner();
     getContacts();
 }
 
@@ -125,6 +127,7 @@ function getContacts() {
     let data = api.getContacts()
                 .then(setContacts)
                 .then(renderContacts)
+                .then(removeSpinner)
                 .then(checkBirthDates);
 }
 
@@ -136,7 +139,7 @@ function renderContacts(data) {
     data.forEach(item => {
         renderContact(item);
     });
-} 
+}
 
 function renderContact(contact) {
     const html = contactTemplate.replace('{{id}}', contact.id)
@@ -147,6 +150,18 @@ function renderContact(contact) {
 
     const contactElem = htmlToElement(html);
     contactsContainer.append(contactElem);
+}
+
+function showSpinner() {
+    const html = `<div class="loader-container">
+                    <div class="loader"></div>
+                  </div>`;
+    spinner = htmlToElement(html);
+    document.body.append(spinner);
+}
+
+function removeSpinner() {
+    spinner.remove();
 }
 
 function fillInForm(contact) {
