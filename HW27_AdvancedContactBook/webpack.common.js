@@ -46,8 +46,7 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new ScriptExtHtmlWebpackPlugin({
-            defaultAttribute: 'defer',
-            // inject: 'head'
+            defaultAttribute: 'defer'
         }),
         new ExtractTextPlugin('bundle.css')
     ]
