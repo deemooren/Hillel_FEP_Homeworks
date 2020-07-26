@@ -1,7 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -41,13 +40,9 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',
-            inject: 'head'
+            template: './src/index.html'
         }),
         new CleanWebpackPlugin(),
-        new ScriptExtHtmlWebpackPlugin({
-            defaultAttribute: 'defer'
-        }),
         new ExtractTextPlugin('bundle.css')
     ]
 };
